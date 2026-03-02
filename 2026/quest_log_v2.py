@@ -9,10 +9,16 @@ def add_quest(quests):
     name = input("Enter quest name: ").strip()
     points = int(input("Enter the score value: "))
     quests.append([name, points])
+    print(quests)
 
 def list_quests(quests):
     # TODO: Display quests in numbered format
-    pass
+    r = 0
+    c = 0
+    while r < len(quests):
+        print(quests[r][c], quests[r][c + 1])
+        r += 1
+        #c += 1
 
 def main():
     quests = []   # This will now store [name, points]
