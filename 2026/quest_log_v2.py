@@ -13,10 +13,10 @@ def add_quest(quests):
 
 def list_quests(quests):
     # TODO: Display quests in numbered format
-    r = 0
-    c = 0
+    r = 0 # row
+    c = 0 # column
     while r < len(quests):
-        print(quests[r][c], quests[r][c + 1])
+        print(r + 1, ". ", quests[r][c], " - ", quests[r][c + 1], " points")
         r += 1
         #c += 1
 
