@@ -7,14 +7,14 @@ friends = ["Alex", "Sam", "Jordan"] # From 5.2 instructions
 print(f"Original list: {friends}")
 friends.append("Harry") # Step 1
 friends.append("Roger")
-#print(friends) # Test
+#print(friends)
 friends.remove("Alex") # Step 2
-#print(friends) # Test
+#print(friends)
 friends.pop(1) # Step 3
-#print(friends) # Test
+#print(friends)
 friends.append("Cameron") # Step 4
 friends.append("Phil")
-#print(friends) # Test
+#print(friends)
 friends.sort()
 print(f"New list: {friends}")
 print(f"Number of friends: {len(friends)}") # Step 5
