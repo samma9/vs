@@ -1,3 +1,7 @@
+# Quest Log Version 2
+# Samuel Marriott 2/03/2026
+# PF 5.4
+
 def show_menu():
     print("\n Quest Log v2")
     print("1: Add quest")
