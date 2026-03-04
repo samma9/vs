@@ -58,7 +58,8 @@ def main():
         elif choice == "3":
             save_quests(quests)
         elif choice == "4":
-            load_quests(quests)
+         quests = load_quests(quests)
+         #   quests = load_quests()  
         elif choice == "5":
             print("Goodbye!")
             break
