@@ -1,6 +1,7 @@
-# Quest Log Version 2
-# Samuel Marriott 2/03/2026
-# PF 5.4
+"""Quest Log Version 2
+Samuel Marriott 2/03/2026
+PF 5.4
+Updated 4/03/2026 to open files, save & load quests"""
 
 def show_menu():
     print("\n Quest Log v2")
