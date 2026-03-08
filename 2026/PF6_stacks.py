@@ -15,7 +15,7 @@ def check_empty(stack):
 def push(stack, item):
     """Add an item to the top of the stack."""
     stack.append(item)
-    print(f"{item} has been added to the stack.")
+    print(f"{item} items has been added to the stack.")
 
 def pop(stack):
     """Remove and return the top item from the stack."""
@@ -34,31 +34,41 @@ def peek(stack):
     return stack[-1]
 
 # -----------------------------
-# Main program (example usage)
+# Main program (Task 1: Stack Modification)
+# Samuel Marriott - 8/03/2026
 # -----------------------------
 
 my_stack = create_stack()
+# The user is asked how many items they would like to push.
+items = int(input("How many items would you like to add? "))
 
-# Push elements onto the stack
-push(my_stack, "1")
-push(my_stack, "2")
-push(my_stack, "3")
-push(my_stack, "4")
+# A loop is used to push user-entered values onto the stack.
+i = 0
+while i < items:
+    i += 1
+    push(my_stack, i)
+    # The stack is printed after each push.
+    print("\n Current stack:", list(my_stack))
 
-# Display the stack
-print("\nCurrent stack:", list(my_stack))
+# peek() is demonstrated before popping.
+print("\n Top of stack (peek):", peek(my_stack))
 
-# Peek at the top item
-print("\nTop of stack (peek):", peek(my_stack))
-
-# Pop an element
+# Two items are popped.
+pop(my_stack)
 pop(my_stack)
 
-# Peek again after popping
-print("\nTop of stack after pop (peek):", peek(my_stack))
+# peek() is demonstrated after popping.
+print("\n Top of stack after pop (peek):", peek(my_stack))
+
+# The stack is printed again.
+print("\n Current stack:", list(my_stack))
+
+# Attempt to pop once more after the stack becomes empty to demonstrate underflow handling.
+pop(my_stack)
 
 # Display the stack after popping
-print("\nStack after popping:", list(my_stack))
+print("\n Stack after popping:", list(my_stack))
 
 # Optional: Check if stack is empty
-print("\nIs the stack empty?", check_empty(my_stack))
+print("\n Is the stack empty?", check_empty(my_stack))
+
