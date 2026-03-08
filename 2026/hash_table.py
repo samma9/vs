@@ -52,3 +52,15 @@ students[new_id] = {
     }
 
 print("Student added successfully")
+
+# Q1. Why is a unique ID suitable as a key in a hash table?
+# A. It eliminates collisions, maximising performace.
+
+# Q2. Why are hash tables faster than lists for searching by ID?
+# A. The hash function calculates the memory location of the item, allowing faster access than linear search.
+
+# Q3. 
+# a) What is a collision in a hash table?
+# A. Where two different keys generate the same index in a hash table.
+# b) How might it be handled?
+# A. In chaining, the colliding entries are stored in a bucket.
