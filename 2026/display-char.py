@@ -1,10 +1,6 @@
 # Display Character
 # Created by Samuel Marriott on 15/03/2026
 
-'''1. Asks the user to input a string.
-2. Asks the user to input an integer (index)
-3. Displays the character at that index in the string. (input_string[index]).'''
-
 while True:
     try:
         input_string = input("Say something: ")
