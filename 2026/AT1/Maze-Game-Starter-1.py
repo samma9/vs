@@ -66,6 +66,28 @@ def show_help():
     # score
     # map
 
+# ----------------------------------
+# 💾 LOAD/SAVE GAME & SCORE
+# ----------------------------------
+def save_game(current_room, inventory):
+    inventory = []
+    with open("save_file.txt", "w") as file:
+        file.write(current_room + "\n") # Save the current room on the first line
+        file.write(",".join(inventory)) # Save inventory items as a comma_separated list
+    print("\n 💾 Game saved successfully!")
+
+def load_game():
+    global inventory
+    try:
+        with open("save_file.txt", "r") as file:
+            lines = file.readlines()
+            room = lines[0].strip() # Read the first line for the current room
+            inventory = lines[1].strip().split(",") if len(lines) > 1 else [] # Read inventory
+        print("\n 💾 Game loaded successfully!")
+        return room
+    except FileNotFoundError:
+        print("\n ⚠️ No saved file found. Starting new game...")
+        return "Room A"
 
 # ----------------------------------
 # 📍 SHOW CURRENT ROOM
