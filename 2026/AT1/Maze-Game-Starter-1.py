@@ -17,13 +17,33 @@
 # ----------------------------------
 rooms = {
     "Room1": {
-        "desc": "Description appropriate to theme.",
-        "up": "Room2"
+        "desc": "A hint of light is visible ahead.",
+        "forward": "Room2"
     },
-
     "Room2": {
-        "desc": "A long hallway stretches ahead.",
-        "down": "Room1"
+        "desc": "A long wooden bridge stretches ahead.",
+        "backward": "Room1",
+        "left": "Room3",
+        "right": "Room4",
+        "forward": "Room5"
+    },
+    "Room3": {
+        "desc": "An item lies in front of you.",
+        "right": "Room2",
+        "up": "Room6"
+    },
+    "Room4":{
+        "desc": "An item lies in front of you.",
+        "left": "Room2",
+        "forward": "Room7"
+    },
+    "Room5": {
+        "desc": "A massive cave surrounds."
+        "Decide where to go carefully, as one of the bridges will collapse beneath you.",
+        "left": "Room6",
+        "right": "Room7",
+        "forward": "Room10",
+        "backward": "Room2"
     }
 
     # 👉 ADD MORE ROOMS
@@ -48,7 +68,7 @@ def show_intro():
 
 def show_help():
     print("\n📜 Commands you can use:")
-    print("- up / down / left / right \n ➡️ move between rooms")
+    print("- forward / backward / left / right \n ➡️ move between rooms")
     print("- help                   \n ❓ show commands")
     print("- quit                   \n 🚪 exit the game")
     print("- inventory              \n 🎒 check your inventory")
@@ -85,7 +105,11 @@ def load_game():
         with open("save_file.txt", "r") as file:
             lines = file.readlines()
             room = lines[0].strip() # Read the first line for the current room
-            inventory = lines[1].strip().split(",") if len(lines) > 1 else [] # Read inventory
+            if len(lines) > 1: # Read inventory
+                inventory = lines[1].strip().split(",")
+            else:
+                inventory = []
+
         
         with open("score.txt", "r") as score_file:
             score = int(score_file.read().strip())
