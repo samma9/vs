@@ -14,7 +14,7 @@
 # Samuel Marriott
 # Started: 5/04/2026
 # Due finish: 24/04/2026
-# Finished: .../.../2026
+# Finished: Date/Month/2026
 
 # ----------------------------------
 # 🗺️ ROOMS (ADD MORE APPROPRIATE TO YOUR THEME)
@@ -39,7 +39,7 @@ rooms = {
     },
     "Room 4":{
         "desc": "An item lies in front of you.",
-        "item": "pickaxe",
+        "item": "diamond pickaxe",
         "left": "Room 2",
         "forward": "Room 7"
     },
@@ -161,7 +161,7 @@ def load_game():
 # ----------------------------------
 # 🗺️ MAP
 # ----------------------------------
-def map_save():
+'''def map_save():
     with open("map.txt", "w") as file:
             file.write("")
     print("Map saved!")
@@ -173,8 +173,27 @@ def map_load():
             for each in lines:
                 print(each)
     except FileNotFoundError:
-        print("File not found.")
+        print("File not found.")'''
 
+
+def map():
+    map = [
+    list("⌈⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⌉"),
+    list("⎜      웃   ⎟"),
+    list("⎜    웃     ⎟⏤⏤⏤⏤"),
+    list("⌊⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⌋")
+]
+# Move '@' one step right
+    for y, row in enumerate(map):
+        for x, char in enumerate(row):
+            if char == '@':
+                map[y][x] = ' '
+                map[y][x + 1] = '@'
+                break
+
+# Print updated map
+    for row in map:
+        print("".join(row))
 
 # ----------------------------------
 # 📍 SHOW CURRENT ROOM
@@ -185,7 +204,7 @@ def show_room(current_room):
 
     # 👉 When you add items to rooms, you can show them here like this:
     if "item" in rooms[current_room]:
-        print("You see:", ", ".join(rooms[current_room]["item"]), "👀")
+        print("👀 You see:", "".join(rooms[current_room]["item"]))
 
 
 # ----------------------------------
@@ -229,11 +248,8 @@ def game_loop():
             show_help()
         
         # Show map
-        elif command == "save map":
-            map_save()
-        
-        elif command == "load map":
-            map_load()
+        elif command == "map":
+            map()
         
         # Load saved progress
         elif command == "load":
