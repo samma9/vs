@@ -1,4 +1,4 @@
-# 🧩 MAZE GAME STARTER
+# 🧩 MAZE GAME
 # Year 11SE AT1 Programming Fundamentals
 
 # You will build and improve this program across the unit.
