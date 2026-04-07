@@ -89,6 +89,7 @@ rooms = {
     # You need at least 8 rooms for the task
 }
 
+
 # 🎒 Items you collect will go here
 inventory = []
 #def collect_item():
@@ -172,7 +173,7 @@ def load_game():
 
 def map_load():
     try:
-        with open("map.txt", "r") as file:
+        with open("map.txt", "mapr") as file:
             lines = file.readlines()
             for each in lines:
                 print(each)
@@ -182,30 +183,43 @@ def map_load():
          #01234567890123456789012345678901234567890123456789       
 def map():
     map = [                                                     # ROWS
-    list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"), # 0
-    list("▒         ▒                ▒                     ▒"), # 1
-    list("▒                          ▒                     ▒"), # 2
-    list("▒         ▒                                      ▒"), # 3
-    list("▒         ▒                ▒                     ▒"), # 4
-    list("▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒"), # 5
-    list("▒        ▒                     ▒                 ▒"), # 6 
-    list("▒        ▒                     ▒                 ▒"), # 7
-    list("▒        ▒                     ▒                 ▒"), # 8
-    list("▒                              ▒                 ▒"), # 9
-    list("▒        ▒                     ▒                 ▒"), # 10
-    list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒"), # 11
-    list("▒             ▒                  ▒               ▒"), # 12
-    list("▒             ▒                  ▒               ▒"), # 13
-    list("▒                                ▒               ▒"), # 14
-    list("▒             ▒                  ▒               ▒"), # 15
-    list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒"), # 16
-    list("                       ▒   ▒                  ▒  ▒"), # 17
-    list("                      ▒     ▒                 ▒  ▒"), # 18
-    list("                     ▒       ▒                ▒  ▒"), # 19
-    list("                    ▒   웃    ▒               ▒  ▒"), # 20
-    list("                   ▒▒▒      ▒▒▒               ▒  ▒")  # 21
+        list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"), # 0
+        list("▒         ▒                ▒                     ▒"), # 1
+        list("▒                          ▒                     ▒"), # 2
+        list("▒         ▒                                      ▒"), # 3
+        list("▒         ▒                ▒                     ▒"), # 4
+        list("▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒"), # 5
+        list("▒        ▒                     ▒                 ▒"), # 6 
+        list("▒        ▒                     ▒                 ▒"), # 7
+        list("▒        ▒                     ▒                 ▒"), # 8
+        list("▒                              ▒                 ▒"), # 9
+        list("▒        ▒                     ▒                 ▒"), # 10
+        list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒"), # 11
+        list("▒             ▒                  ▒               ▒"), # 12
+        list("▒             ▒                  ▒               ▒"), # 13
+        list("▒                                ▒               ▒"), # 14
+        list("▒             ▒                  ▒               ▒"), # 15
+        list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒"), # 16
+        list("                       ▒   ▒                  ▒  ▒"), # 17
+        list("                      ▒     ▒                 ▒  ▒"), # 18
+        list("                     ▒       ▒                ▒  ▒"), # 19
+        list("                    ▒         ▒               ▒  ▒"), # 20
+        list("                   ▒▒▒      ▒▒▒               ▒  ▒")  # 21
 
-]
+    ]
+    player="웃"
+    start_position = [21,25]
+    map[start_position[0]][start_position[1]] = player
+    show_map(map)
+
+
+
+def show_map(map):
+    for row in map: 
+        print("".join(row))
+
+
+def junk():
 # Move '@' one step right
     for y, row in enumerate(map):
         for x, char in enumerate(row):

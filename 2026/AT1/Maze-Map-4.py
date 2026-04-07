@@ -89,6 +89,7 @@ rooms = {
     # You need at least 8 rooms for the task
 }
 
+
 # 🎒 Items you collect will go here
 inventory = []
 #def collect_item():
@@ -172,7 +173,7 @@ def load_game():
 
 def map_load():
     try:
-        with open("map.txt", "r") as file:
+        with open("map.txt", "mapr") as file:
             lines = file.readlines()
             for each in lines:
                 print(each)
@@ -182,30 +183,61 @@ def map_load():
          #01234567890123456789012345678901234567890123456789       
 def map():
     map = [                                                     # ROWS
-    list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"), # 0
-    list("▒         ▒                ▒                     ▒"), # 1
-    list("▒                          ▒                     ▒"), # 2
-    list("▒         ▒                                      ▒"), # 3
-    list("▒         ▒                ▒                     ▒"), # 4
-    list("▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒"), # 5
-    list("▒        ▒                     ▒                 ▒"), # 6 
-    list("▒        ▒                     ▒                 ▒"), # 7
-    list("▒        ▒                     ▒                 ▒"), # 8
-    list("▒                              ▒                 ▒"), # 9
-    list("▒        ▒                     ▒                 ▒"), # 10
-    list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒"), # 11
-    list("▒             ▒                  ▒               ▒"), # 12
-    list("▒             ▒                  ▒               ▒"), # 13
-    list("▒                                ▒               ▒"), # 14
-    list("▒             ▒                  ▒               ▒"), # 15
-    list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒"), # 16
-    list("                       ▒   ▒                  ▒  ▒"), # 17
-    list("                      ▒     ▒                 ▒  ▒"), # 18
-    list("                     ▒       ▒                ▒  ▒"), # 19
-    list("                    ▒   웃    ▒               ▒  ▒"), # 20
-    list("                   ▒▒▒      ▒▒▒               ▒  ▒")  # 21
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒", # 0
+        "▒         ▒                ▒                     ▒", # 1
+        "▒                          ▒                     ▒", # 2
+        "▒         ▒                                      ▒", # 3
+        "▒         ▒                ▒                     ▒", # 4
+        "▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒", # 5
+        "▒        ▒                     ▒                 ▒", # 6 
+        "▒        ▒                     ▒                 ▒", # 7
+        "▒        ▒                     ▒                 ▒", # 8
+        "▒                              ▒                 ▒", # 9
+        "▒        ▒                     ▒                 ▒", # 10
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒", # 11
+        "▒             ▒                  ▒               ▒", # 12
+        "▒             ▒                  ▒               ▒", # 13
+        "▒                                ▒               ▒", # 14
+        "▒             ▒                  ▒               ▒", # 15
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒", # 16
+        "                       ▒   ▒                  ▒  ▒", # 17
+        "                      ▒     ▒                 ▒  ▒", # 18
+        "                     ▒       ▒                ▒  ▒", # 19
+        "                    ▒         ▒               ▒  ▒", # 20
+        "                   ▒▒▒      ▒▒▒               ▒  ▒"  # 21
+    ]
+   
+    start_position = [21,25]
+   # map[start_position[0]][start_position[1]] = player
+    show_map(map)
 
-]
+
+
+def show_map(map):
+    r=0  # row zero 
+    player="웃"
+    rows=len(map)
+    while r < rows:
+        c=0
+        rowString=map[r]
+        rowlen=len(rowString)
+        while c < rowlen:  # print each column in row
+            if c==25 and r==21:
+                print(player, end="") 
+                c+=1 # double wide character, so move to next column.
+            elif c==rowlen-1:
+                print(rowString[c])  # print last character and move to next line
+            else:
+                print(rowString[c], end="") 
+                # https://www.w3schools.com/python/ref_func_print.asp
+            c+=1
+        r+=1
+    
+
+        
+
+
+def junk():
 # Move '@' one step right
     for y, row in enumerate(map):
         for x, char in enumerate(row):
