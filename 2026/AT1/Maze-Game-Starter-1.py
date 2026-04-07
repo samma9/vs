@@ -33,12 +33,13 @@ rooms = {
     },
     "Room 3": {
         "desc": "An item lies in front of you.",
-        "item": "emerald",
+        "item": "💎 emerald",
         "right": "Room 2",
         "forward": "Room 6"
     },
     "Room 4":{
-        "desc": "An item lies in front of you.",
+        "desc": "An item lies in front of you."
+        "There is a locked door here. You must find the key that opens it.",
         "item": "pickaxe",
         "left": "Room 2",
         "forward": "Room 7"
@@ -53,9 +54,9 @@ rooms = {
         "backward": "Room 2"
     },
     "Room 6": {
-        "desc": "An item lies and a locked door is in front. You must find the key that opens it."
+        "desc": "An item lies and a locked door is in front. You must find the key that opens it. "
         "Note: The key is not the item that lies in front.",
-        "item": "sword",
+        "item": "🗡️ sword",
         "forward": "Room 9",
         "backward": "Room 3",
         "right": "Room 5"
@@ -74,12 +75,14 @@ rooms = {
     },
     "Room 9": {
         "desc": "A set of something and a bottle lies beneath you.",
+        "item": "armour set",
         "right": "Room 10",
         "backward": "Room 6"
     },
     "Room 10": {
         "desc": "There is a monster preventing you from getting the key for the Room 8 door."
         "You must defeat the monster.",
+        "item": "Room 8 key",
         "left": "Room 9",
         "right": "Room 8",
         "backward": "Room 5"
@@ -180,12 +183,32 @@ def map_load():
         print("File not found.")'''
 
 
+# COLUMNS  10        20        30        40        50
+         #01234567890123456789012345678901234567890123456789       
 def map():
-    map = [
-    list("⌈⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⌉"),
-    list("⎜      웃   ⎟"),
-    list("⎜    웃     ⎟⏤⏤⏤⏤"),
-    list("⌊⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⌋")
+    map = [                                                     # ROWS
+    list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"), # 0
+    list("▒         ▒                ▒                     ▒"), # 1
+    list("▒ 💎  9          👹 10      ▒       💎  8         ▒"), # 2
+    list("▒    𐂫   ▒     💎  🔑      👿           🔑        ▒"), # 3
+    list("▒         ▒                ▒                     ▒"), # 4
+    list("▒▒▒▒🚪▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒"), # 5
+    list("▒        ▒                     ▒                 ▒"), # 6
+    list("▒        ▒                     ▒                 ▒"), # 7
+    list("▒  🗡️ 6             5 🛡️             👿  7        ▒"), # 8
+    list("▒   💎   ▒          💎          ▒      💎         ▒"), # 9
+    list("▒        ▒                     ▒                 ▒"), # 10
+    list("▒▒▒▒🪤▒▒▒▒▒▒▒▒▒▒▒▒▒🪨🪨🪨▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤▒▒▒▒▒▒▒"), # 11
+    list("▒             ▒                  ▒               ▒"), # 12
+    list("▒      🔑     ▒                  ▒      💎        ▒"), # 13
+    list("▒    💎 3             💎  2      🚪     4 ⛏️       ▒"), # 14
+    list("▒             ▒                  ▒               ▒"), # 15
+    list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🚪▒"), # 16
+    list("                       ▒   ▒                  ▒  ▒"), # 17
+    list("                      ▒     ▒                 ▒  ▒"), # 18
+    list("                     ▒   1   ▒                ▒  ▒"), # 19
+    list("                    ▒         ▒               ▒  ▒"), # 20
+    list("                   ▒▒▒  웃   ▒▒▒               ▒  ▒")  # 21
 ]
 # Move '@' one step right
     for y, row in enumerate(map):
@@ -199,6 +222,13 @@ def map():
     for row in map:
         print("".join(row))
 
+# Legend
+    print("\n Legend:" \
+    "\n - 👿: Mob/monster - you must encounter these to be able to move on." \
+    "\n - 🚪: Locked door - use items collected to open these." \
+    "\n - The other symbols are items. You need these to unlock doors or defeat mobs.")
+    print("The numbers in each room are the room numbers. \n You must visit each room in numerical order.")
+
 # ----------------------------------
 # 📍 SHOW CURRENT ROOM
 # ----------------------------------
@@ -208,7 +238,9 @@ def show_room(current_room):
 
     # 👉 When you add items to rooms, you can show them here like this:
     if "item" in rooms[current_room]:
-        print("👀 You see:", "".join(rooms[current_room]["item"]))
+        print("👀 You have found a(n):", "".join(rooms[current_room]["item"]))
+    else:
+        print("No item here.")
 
 # ----------------------------------
 # 🚶 MOVE BETWEEN ROOMS
@@ -220,6 +252,10 @@ def move(direction, current_room):
         new_room = rooms[current_room][direction]
         print(f"\n🚶 You moved {direction} to {new_room}.")
         return new_room
+    if current_room == "Room 3" and direction == "forward":
+        print("You tripped a tripwire, an arrow was fired and struck you in the chest, and you died.")
+        current_room = "Room 1"
+        return current_room
 
     # If the direction is not valid
     print("\n⛔ You can't go that way!")
