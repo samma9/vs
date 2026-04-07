@@ -23,31 +23,29 @@ rooms = {
     "Room 1": {
         "desc": "A hint of light is visible ahead.",
         "forward": "Room 2",
-        "position": [21,25]
+        "position": {"r": 21, "c": 25}
     },
     "Room 2": {
         "desc": "A long wooden bridge stretches ahead, but there is a pile of rocks in the way.",
         "backward": "Room 1",
         "left": "Room 3",
         "right": "Room 4",
-        "forward": "Room 5"
-        ,
-        "position": [12,25]
+        "forward": "Room 5",
+        "position": {"r": 12, "c": 25}
     },
     "Room 3": {
         "desc": "An item lies in front of you.",
         "item": "emerald",
         "right": "Room 2",
         "forward": "Room 6",
-        "position": [12,5] 
+        "position": {"r": 12, "c": 5}
     },
     "Room 4":{
         "desc": "An item lies in front of you.",
         "item": "pickaxe",
         "left": "Room 2",
-        "forward": "Room 7"
-        ,
-        "position": [8,25]
+        "forward": "Room 7",
+        "position": {"r": 8, "c": 25}
     },
     "Room 5": {
         "desc": "A massive cave surrounds."
@@ -57,7 +55,7 @@ rooms = {
         "right": "Room 7",
         "forward": "Room 10",
         "backward": "Room 2",
-        "position": [8,5]
+        "position": {"r": 8, "c": 5}
     },
     "Room 6": {
         "desc": "An item lies and a locked door is in front. You must find the key that opens it."
@@ -66,7 +64,7 @@ rooms = {
         "forward": "Room 9",
         "backward": "Room 3",
         "right": "Room 5",
-        "position": [3,5] 
+        "position": {"r": 3, "c": 5}
     },
     "Room 7": {
         "desc": "There is a wave of mobs preventing you from getting further. You must defeat the mobs.",
@@ -74,7 +72,7 @@ rooms = {
         "backward": "Room 4",
         "left": "Room 5"
         ,
-        "position": [3,25]
+        "position": {"r": 3, "c": 25}
     },
     "Room 8":{
         "desc": "There is a locked door to the right. You must find the key that opens it.",
@@ -82,23 +80,22 @@ rooms = {
         "backward": "Room 7",
         "left": "Room 10"
         ,
-        "position": [3,35]
+        "position": {"r": 3, "c": 35}
     },
     "Room 9": {
         "desc": "A set of something and a bottle lies beneath you.",
         "right": "Room 10",
         "backward": "Room 6"
         ,
-        "position": [8,35]
+        "position": {"r": 8, "c": 35}
     },
     "Room 10": {
         "desc": "There is a monster preventing you from getting the key for the Room 8 door."
         "You must defeat the monster.",
         "left": "Room 9",
         "right": "Room 8",
-        "backward": "Room 5"
-        ,
-        "position": [14,35]
+        "backward": "Room 5" ,
+        "position": {"r": 14, "c": 35}
     }
 
     # 👉 ADD MORE ROOMS
@@ -225,8 +222,8 @@ def map(current_room):
         "                    ▒         ▒               ▒  ▒", # 20
         "                   ▒▒▒      ▒▒▒               ▒  ▒"  # 21
     ]
-    position= rooms[current_room]["position"]
-    show_map(map, position)
+    current_position={"r": rooms[current_room]["position"]["r"], "c": rooms[current_room]["position"]["c"]}
+    show_map(map, current_position)
 
 
 
@@ -239,7 +236,7 @@ def show_map(map, position):
         rowString=map[r]
         rowlen=len(rowString)
         while c < rowlen:  # print each column in row
-            if c==position[1] and r==position[0]:
+            if c==position["c"] and r==position["r"]:
                 print(player, end="") 
                 c+=1 # double wide character, so move to next column.
             elif c==rowlen-1:
@@ -333,7 +330,7 @@ def game_loop():
         
         # Show map
         elif command == "map":
-            map(map_position)
+            map(current_room)
         
         # Collect item
         #elif command == "pick up":
