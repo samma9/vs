@@ -39,7 +39,7 @@ rooms = {
         "item": "emerald",
         "right": "Room 2",
         "forward": "Room 6",
-        "position": [21,25] 
+        "position": [12,5] 
     },
     "Room 4":{
         "desc": "An item lies in front of you.",
@@ -47,7 +47,7 @@ rooms = {
         "left": "Room 2",
         "forward": "Room 7"
         ,
-        "position": [21,25]
+        "position": [8,25]
     },
     "Room 5": {
         "desc": "A massive cave surrounds."
@@ -57,7 +57,7 @@ rooms = {
         "right": "Room 7",
         "forward": "Room 10",
         "backward": "Room 2",
-        "position": [21,25]
+        "position": [8,5]
     },
     "Room 6": {
         "desc": "An item lies and a locked door is in front. You must find the key that opens it."
@@ -66,7 +66,7 @@ rooms = {
         "forward": "Room 9",
         "backward": "Room 3",
         "right": "Room 5",
-        "position": [21,25] 
+        "position": [3,5] 
     },
     "Room 7": {
         "desc": "There is a wave of mobs preventing you from getting further. You must defeat the mobs.",
@@ -74,7 +74,7 @@ rooms = {
         "backward": "Room 4",
         "left": "Room 5"
         ,
-        "position": [21,25]
+        "position": [3,25]
     },
     "Room 8":{
         "desc": "There is a locked door to the right. You must find the key that opens it.",
@@ -82,14 +82,14 @@ rooms = {
         "backward": "Room 7",
         "left": "Room 10"
         ,
-        "position": [21,25]
+        "position": [3,35]
     },
     "Room 9": {
         "desc": "A set of something and a bottle lies beneath you.",
         "right": "Room 10",
         "backward": "Room 6"
         ,
-        "position": [21,25]
+        "position": [8,35]
     },
     "Room 10": {
         "desc": "There is a monster preventing you from getting the key for the Room 8 door."
@@ -98,7 +98,7 @@ rooms = {
         "right": "Room 8",
         "backward": "Room 5"
         ,
-        "position": [21,25]
+        "position": [14,35]
     }
 
     # 👉 ADD MORE ROOMS
@@ -200,7 +200,7 @@ def map_load():
 # Each character in the string is a column in that row.
 # row string       10        20        30        40        50
 # len is 01234567890123456789012345678901234567890123456789       
-def map(current_position):
+def map(current_room):
     map = [                                                     # ROWS
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒", # 0
         "▒         ▒                ▒                     ▒", # 1
@@ -225,10 +225,8 @@ def map(current_position):
         "                    ▒         ▒               ▒  ▒", # 20
         "                   ▒▒▒      ▒▒▒               ▒  ▒"  # 21
     ]
-   
-    
-   # map[start_position[0]][start_position[1]] = player
-    show_map(map,current_position)
+    position= rooms[current_room]["position"]
+    show_map(map, position)
 
 
 
