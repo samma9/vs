@@ -93,13 +93,6 @@ rooms = {
     # You need at least 8 rooms for the task
 }
 
-start = (214, 36)
-
-# 🎒 Items you collect will go here
-inventory = []
-#def collect_item():
-
-
 # ⭐ You will create a scoring system later
 score = 0
 
@@ -188,23 +181,23 @@ def map_load():
 
 # COLUMNS  10        20        30        40        50
          #01234567890123456789012345678901234567890123456789       
-def map():
+def map1():
     map = [                                                     # ROWS
     list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"), # 0
     list("▒         ▒                ▒                     ▒"), # 1
-    list("▒ 💎             👹         ▒       💎            ▒"), # 2
-    list("▒    𐂫   ▒     💎  🔑      👿           🔑        ▒"), # 3
+    list("▒               👹         ▒                     ▒"), # 2
+    list("▒    𐂫   ▒        🔑      👿           🔑        ▒"), # 3
     list("▒         ▒                ▒                     ▒"), # 4
-    list("▒▒▒▒🚪▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒"), # 5
+    list("▒▒▒▒🚪▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒"), # 5
     list("▒        ▒                     ▒                 ▒"), # 6
     list("▒        ▒                     ▒                 ▒"), # 7
-    list("▒  🗡️                 🛡️             👿           ▒"), # 8
-    list("▒   💎   ▒          💎          ▒      💎         ▒"), # 9
+    list("▒  🗡️               🛡️          👿      👿        ▒"), # 8
+    list("▒        ▒                     ▒      💎         ▒"), # 9
     list("▒        ▒                     ▒                 ▒"), # 10
     list("▒▒▒▒🪤▒▒▒▒▒▒▒▒▒▒▒▒▒🪨🪨🪨▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒👿▒▒▒▒▒▒▒"), # 11
     list("▒             ▒                  ▒               ▒"), # 12
-    list("▒      🔑     ▒                  ▒      💎        ▒"), # 13
-    list("▒    💎               💎         🚪       ⛏️       ▒"), # 14
+    list("▒             ▒                  ▒               ▒"), # 13
+    list("▒       🔑                       🚪       ⛏️      ▒"), # 14
     list("▒             ▒                  ▒               ▒"), # 15
     list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🚪▒"), # 16
     list("                       ▒   ▒                  ▒  ▒"), # 17
@@ -213,12 +206,65 @@ def map():
     list("                    ▒         ▒               ▒  ▒"), # 20
     list("                   ▒▒▒  웃   ▒▒▒               ▒  ▒")  # 21
 ]
-# Move '@' one step right
+    #01234567890123456789012345678901234567890123456789       
+def map2():
+    map = [                                                     # ROWS
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n", # 0
+        "▒         ▒                ▒                     ▒\n", # 1
+        "▒                          ▒                     ▒\n", # 2
+        "▒         ▒                                      ▒\n", # 3
+        "▒         ▒                ▒                     ▒\n", # 4
+        "▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒\n", # 5
+        "▒        ▒                     ▒                 ▒\n", # 6 
+        "▒        ▒                     ▒                 ▒\n", # 7
+        "▒        ▒                     ▒                 ▒\n", # 8
+        "▒                              ▒                 ▒\n", # 9
+        "▒        ▒                     ▒                 ▒\n", # 10
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒\n", # 11
+        "▒             ▒                  ▒               ▒\n", # 12
+        "▒             ▒                  ▒               ▒\n", # 13
+        "▒                                ▒               ▒\n", # 14
+        "▒             ▒                  ▒               ▒\n", # 15
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 16
+        "                       ▒   ▒                  ▒  ▒\n", # 17
+        "                      ▒     ▒                 ▒  ▒\n", # 18
+        "                     ▒       ▒                ▒  ▒\n", # 19
+        "                    ▒         ▒               ▒  ▒\n", # 20
+        "                   ▒▒▒      ▒▒▒               ▒  ▒\n"  # 21
+    ]
+   
+    start_position = [21,25]
+   # map[start_position[0]][start_position[1]] = player
+    show_map(map)
+
+
+
+def show_map(map):
+    r=0  # row zero 
+    player="웃"
+    rows=len(map)
+    while r < rows:
+        c=0
+        rowString=map[r]
+        rowlen=len(rowString)
+        while c < rowlen:  # print each column in row
+            if c==25 and r == 21:
+                print(player, end="") 
+                c+=1 # double wide character, so move to next column.
+            else:
+                print(rowString[c], end="") 
+                # https://www.w3schools.com/python/ref_func_print.asp
+            c+=1
+        r+=1
+    
+
+# Move '웃' one step right
+def junk():
     for y, row in enumerate(map):
         for x, char in enumerate(row):
-            if char == '@':
+            if char == '웃':
                 map[y][x] = ' '
-                map[y][x + 1] = '@'
+                map[y][x + 1] = '웃'
                 break
 
 # Print updated map
@@ -229,7 +275,8 @@ def map():
     print("\n Legend:" \
     "\n - 👿: Mob/monster - you must encounter these to be able to move on." \
     "\n - 🚪: Locked door - use items collected to open these." \
-    "\n - 💎: Gems" \
+    "\n - 💎: Gems - must be collected to repair weapons and armory." \
+    "\n - 🪨: Rocks - must be cleared to progress." \
     "\n - The other symbols are items. You need these to unlock doors or defeat mobs.")
     print("The numbers in each room are the room numbers. \n You must visit each room in numerical order.")
 
@@ -245,6 +292,16 @@ def show_room(current_room):
         print("👀 You have found a(n):", "".join(rooms[current_room]["item"]))
     else:
         print("No item here.")
+
+# 🎒 Items collected will go here
+inventory = list()
+def collect_item(current_room):
+    if "item" in rooms[current_room]:
+        inventory.append({"item"})
+        print(inventory)
+    else:
+        print("No item to collect in this room.")
+        return inventory
 
 # ----------------------------------
 # 🚶 MOVE BETWEEN ROOMS
@@ -291,11 +348,11 @@ def game_loop():
         
         # Show map
         elif command == "map":
-            map()
+            map2()
         
         # Collect item
-        #elif command == "pick up":
-            
+        elif command == "pick up":
+            collect_item(current_room)
         
         # Load saved progress
         elif command == "load":
