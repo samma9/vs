@@ -46,7 +46,7 @@ rooms = {
         "item": "⛏️ pickaxe",
         "left": "Room 2",
         "forward": "Room 7",
-        "pos": {"r": 14, "c": 39}
+        "pos": {"r": 14, "c": 46}
     },
     "Room 5": {
         "desc": "A massive cave surrounds."
@@ -56,7 +56,7 @@ rooms = {
         "right": "Room 7",
         "forward": "Room 10",
         "backward": "Room 2",
-        "pos": {"r": 8, "c": 5}
+        "pos": {"r": 8, "c": 25}
     },
     "Room 6": {
         "desc": "An item lies and a locked door is in front. You must find the key that opens it. "
@@ -65,7 +65,7 @@ rooms = {
         "forward": "Room 9",
         "backward": "Room 3",
         "right": "Room 5",
-        "pos": {"r": 12, "c": 25}
+        "pos": {"r": 8, "c": 5}
     },
     "Room 7": {
         "desc": "There is a wave of mobs preventing you from getting further."
@@ -73,21 +73,21 @@ rooms = {
         "forward": "Room 8",
         "backward": "Room 4",
         "left": "Room 5",
-        "pos": {"r": 3, "c": 5}
+        "pos": {"r": 8, "c": 48}
     },
     "Room 8":{
         "desc": "There is a locked door to the right. You must find the key that opens it.",
-        "item": "Room 6 key",
+        "item": "🗝️ Room 6 key",
         "backward": "Room 7",
         "left": "Room 10",
-        "pos": {"r": 3, "c": 40}
+        "pos": {"r": 2, "c": 44}
     },
     "Room 9": {
         "desc": "A set of something and a bottle lies beneath you.",
         "item": "armour set",
         "right": "Room 10",
         "backward": "Room 6",
-        "pos": {"r": 8, "c": 35}
+        "pos": {"r": 2, "c": 4}
     },
     "Room 10": {
         "desc": "There is a monster preventing you from getting the key for the Room 8 door."
@@ -96,9 +96,8 @@ rooms = {
         "left": "Room 9",
         "right": "Room 8",
         "backward": "Room 5",
-        "pos": {"r": 14, "c": 35}
+        "pos": {"r": 2, "c": 21}
     }
-
 
     # 👉 ADD MORE ROOMS
     # You need at least 8 rooms for the task
@@ -129,7 +128,7 @@ def show_help():
     print("- load                   \n 💾 load your saved progress")
     print("- score                  \n ⭐  check how many points you have")
     print("- map                    \n 🗺️  show map of your current location")
-
+    print("- use item:",   "\n use the item you wish to use in that circumstance")
     # 👉 Add more commands such as:
     # inventory
     # pick up item
@@ -175,53 +174,25 @@ def load_game():
 # ----------------------------------
 # 🗺️ MAP
 # ----------------------------------
-
-# COLUMNS  10        20        30        40        50
-         #01234567890123456789012345678901234567890123456789       
-'''def map1():
-    map = [                                                     # ROWS
-    list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"), # 0
-    list("▒         ▒                ▒                     ▒"), # 1
-    list("▒               👹         ▒                     ▒"), # 2
-    list("▒    𐂫   ▒        🔑      👿           🔑        ▒"), # 3
-    list("▒         ▒                ▒                     ▒"), # 4
-    list("▒▒▒▒🚪▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒"), # 5
-    list("▒        ▒                     ▒                 ▒"), # 6
-    list("▒        ▒                     ▒                 ▒"), # 7
-    list("▒  🗡️               🛡️          👿      👿        ▒"), # 8
-    list("▒        ▒                     ▒      💎         ▒"), # 9
-    list("▒        ▒                     ▒                 ▒"), # 10
-    list("▒▒▒▒🪤▒▒▒▒▒▒▒▒▒▒▒▒▒🪨🪨🪨▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒👿▒▒▒▒▒▒▒▒"), # 11
-    list("▒             ▒                  ▒               ▒"), # 12
-    list("▒             ▒                  ▒               ▒"), # 13
-    list("▒       🔑                       🚪       ⛏️      ▒"), # 14
-    list("▒             ▒                  ▒               ▒"), # 15
-    list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🚪▒"), # 16
-    list("                       ▒   ▒                  ▒  ▒"), # 17
-    list("                      ▒     ▒                 ▒  ▒"), # 18
-    list("                     ▒       ▒                ▒  ▒"), # 19
-    list("                    ▒         ▒               ▒  ▒"), # 20
-    list("                   ▒▒▒  웃   ▒▒▒               ▒  ▒")  # 21
-]'''
 # COLUMNS  10        20        30        40        50
            #01234567890123456789012345678901234567890123456789       
-def map2(current_room):
+def map(current_room):
     map = [                                                     # ROWS
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n", # 0
-        "▒         ▒                ▒                     ▒\n", # 1
-        "▒                          ▒                     ▒\n", # 2
-        "▒         ▒                               🗝️     ▒\n", # 3
-        "▒         ▒                ▒                     ▒\n", # 4
-        "▒▒▒▒🚪▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒\n", # 5
+        "▒         ▒                    ▒                 ▒\n", # 1
+        "▒  💎  𐂫      👹      🏹       👿            🗝️   ▒\n", # 2
+        "▒         ▒                    ▒                 ▒\n", # 3
+        "▒         ▒                    ▒                 ▒\n", # 4
+        "▒▒▒▒🚪▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 5
         "▒        ▒                     ▒                 ▒\n", # 6 
         "▒        ▒                     ▒                 ▒\n", # 7
-        "▒                                  👿            ▒\n", # 8
+        "▒  🗡️                   🛡️           👿            ▒\n", # 8
         "▒        ▒                     ▒                 ▒\n", # 9
         "▒        ▒                     ▒                 ▒\n", # 10
-        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪨 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒👿▒▒▒▒▒▒▒▒\n", # 11
+        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪨 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒👿▒\n", # 11
         "▒             ▒                  ▒               ▒\n", # 12
         "▒             ▒           💡     ▒               ▒\n", # 13
-        "▒    🔑                          🚪        ⛏️     ▒\n", # 14
+        "▒    🔑                          🚪           ⛏️  ▒\n", # 14
         "▒             ▒                  ▒               ▒\n", # 15
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🚪▒\n", # 16
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 17
@@ -230,8 +201,10 @@ def map2(current_room):
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒       ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 20
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒     ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n"  # 21
     ]
+    # Legend
     print("\n Legend:" \
     "\n - 👿: Mob/monster - you must encounter these to be able to move on." \
+    "\n - 👹: Apex predator - you must put on your armour first before swiping him with your sword." \
     "\n - 🚪: Locked door - use items collected to open these." \
     "\n - 💎: Gems - must be collected to repair weapons and armory." \
     "\n - 🪨 : Rocks - must be cleared to progress." \
@@ -262,22 +235,6 @@ def show_map(map, pos):
             c+=1
         r+=1
     
-
-# Move '웃' one step right
-def map_refine():
-    for y, row in enumerate(map):
-        for x, char in enumerate(row):
-            if char == '웃':
-                map[y][x] = ' '
-                map[y][x + 1] = '웃'
-                break
-
-# Print updated map
-    for row in map:
-        print("".join(row))
-
-# Legend
-    
 # ----------------------------------
 # 📍 SHOW CURRENT ROOM
 # ----------------------------------
@@ -292,14 +249,17 @@ def show_room(current_room):
         print("No item here.")
 
 # 🎒 Items collected will go here
-inventory = list()
 def collect_item(current_room):
+    inventory = []
     if "item" in rooms[current_room]:
-        inventory.append({"item"})
-        print(inventory)
+        inventory.append('item')
+        return inventory
     else:
         print("No item to collect in this room.")
         return inventory
+
+def check_inventory(inventory):
+    print(f"Your inventory: \n{inventory}")
 
 # ----------------------------------
 # 🚶 MOVE BETWEEN ROOMS
@@ -311,14 +271,10 @@ def move(direction, current_room):
         new_room = rooms[current_room][direction]
         print(f"\n🚶 You moved {direction} to {new_room}.")
         return new_room
-    if current_room == "Room 3" and direction == "forward":
-        print("You tripped a tripwire, an arrow was fired and struck you in the chest, and you died.")
-        current_room = "Room 1"
-        return current_room
-
     # If the direction is not valid
-    print("\n⛔ You can't go that way!")
-    return current_room
+    else:
+        print("\n⛔ You can't go that way!")
+        return current_room
 
 
 # ----------------------------------
@@ -330,7 +286,6 @@ def game_loop():
     show_intro()
 
     while True:
-
         show_room(current_room)
         
         # Ask the player for a command
@@ -346,19 +301,23 @@ def game_loop():
         
         # Show map
         elif command == "map":
-            map2(current_room)
+            map(current_room)
         
         # Collect item
         elif command == "pick up":
             collect_item(current_room)
         
-        # Load saved progress
-        elif command == "load":
-            load_game()
+        # Check inventory
+        elif command == "inventory":
+            check_inventory(inventory)
         
         # Save game
         elif command == "save":
             save_game(current_room, inventory, score)
+
+        # Load saved progress
+        elif command == "load":
+            load_game()
 
         # Quit game
         elif command == "quit":
@@ -369,7 +328,6 @@ def game_loop():
         else:
             print("\n❌ Invalid command.")
             show_help()
-
 
 # ----------------------------------
 # ▶️ START GAME
