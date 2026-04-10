@@ -34,15 +34,17 @@ rooms = {
         "pos": {"r": 14, "c": 24}
     },
     "Room 3": {
-        "desc": "An item lies in front of you.",
+        "desc": "An item lies on your left.",
         "item": "🔑 key",
         "right": "Room 2",
         "forward": "Room 6",
         "pos": {"r": 14, "c": 6}
     },
     "Room 4":{
-        "desc": "An item lies in front of you."
+        "desc": "An item lies in front of you, and there is a locked door behind."
+        "You must find the ancient key that opens it."
         "There is a locked door here. You must find the key that opens it.",
+        "requires": "🔑 key",
         "item": "⛏️ pickaxe",
         "left": "Room 2",
         "forward": "Room 7",
@@ -52,6 +54,7 @@ rooms = {
         "desc": "A massive cave surrounds."
         "Decide where to go carefully, as one of the bridges will collapse beneath you.",
         "item": "shield",
+        "requires": "⛏️ pickaxe",
         "left": "Room 6",
         "right": "Room 7",
         "forward": "Room 10",
@@ -70,14 +73,15 @@ rooms = {
     "Room 7": {
         "desc": "There is a wave of mobs preventing you from getting further."
         "Use your sword to defeat the mobs. Use your shield to deflect their attacks.",
+        "requires": "🗡️ sword",
         "forward": "Room 8",
         "backward": "Room 4",
         "left": "Room 5",
         "pos": {"r": 8, "c": 48}
     },
     "Room 8":{
-        "desc": "There is a locked door to the right. You must find the key that opens it.",
-        "item": "🗝️ Room 6 key",
+        "desc": "",
+        "item": "🧪 potion bottle of regeneration",
         "backward": "Room 7",
         "left": "Room 10",
         "pos": {"r": 2, "c": 44}
@@ -92,7 +96,7 @@ rooms = {
     "Room 10": {
         "desc": "There is a monster preventing you from getting the key for the Room 8 door."
         "You must defeat the monster.",
-        "item": "Room 8 key",
+        "item": "🔑 key",
         "left": "Room 9",
         "right": "Room 8",
         "backward": "Room 5",
@@ -102,6 +106,9 @@ rooms = {
     # 👉 ADD MORE ROOMS
     # You need at least 8 rooms for the task
 }
+
+# Items collected will go here
+inventory = []
 
 # ⭐ You will create a scoring system later
 score = 0
@@ -140,8 +147,7 @@ def show_help():
 # ----------------------------------
 # 💾 LOAD/SAVE GAME & SCORE
 # ----------------------------------
-def save_game(current_room, inventory, score):
-    inventory = []
+def save_game(current_room, score):
     with open("maze_game.txt", "w") as game_file:
         game_file.write(current_room + "\n") # Save the current room on the first line
         game_file.write(",".join(inventory)) # Save inventory items as a comma_separated list
@@ -180,13 +186,13 @@ def map(current_room):
     map = [                                                     # ROWS
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n", # 0
         "▒         ▒                    ▒                 ▒\n", # 1
-        "▒  💎  𐂫      👹      🏹       👿            🗝️   ▒\n", # 2
+        "▒  💎  𐂫      👹      🗝️ 🏹     👿                ▒\n", # 2
         "▒         ▒                    ▒                 ▒\n", # 3
         "▒         ▒                    ▒                 ▒\n", # 4
         "▒▒▒▒🚪▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 5
         "▒        ▒                     ▒                 ▒\n", # 6 
         "▒        ▒                     ▒                 ▒\n", # 7
-        "▒  🗡️                   🛡️           👿            ▒\n", # 8
+        "▒  🗡️                   🛡️       👿           🧪   ▒\n", # 8
         "▒        ▒                     ▒                 ▒\n", # 9
         "▒        ▒                     ▒                 ▒\n", # 10
         "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪨 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒👿▒\n", # 11
@@ -208,12 +214,11 @@ def map(current_room):
     "\n - 🚪: Locked door - use items collected to open these." \
     "\n - 💎: Gems - must be collected to repair weapons and armory." \
     "\n - 🪨 : Rocks - must be cleared to progress." \
-    "\n - 🪤 : Traps - you will die if you walk into these."
+    "\n - 🪤 : Traps - you will die if you walk into these." \
+    "\n - 💡: Lights - will help you to navigate through the dark passages."
     "\n - The other symbols are items. \nYou need these to unlock doors or defeat mobs.")
     print("The numbers in each room are the room numbers. \n You must visit each room in numerical order.\n")
 
-   
-    start_pos = [21,25]
     current_pos = {"r": rooms[current_room]["pos"]["r"], "c": rooms[current_room]["pos"]["c"]}
     show_map(map, current_pos)
 
@@ -250,27 +255,44 @@ def show_room(current_room):
 
 # 🎒 Items collected will go here
 def collect_item(current_room):
-    inventory = []
     if "item" in rooms[current_room]:
-        inventory.append('item')
-        return inventory
+        inventory.append(rooms[current_room]["item"])
+        print(inventory)
     else:
         print("No item to collect in this room.")
-        return inventory
+        print(inventory)
 
-def check_inventory(inventory):
-    print(f"Your inventory: \n{inventory}")
+def check_bag():
+    if inventory == []:
+        print("You have nothing in your bag.")
+    else:
+        print(f"You have {inventory} in your bag")
 
 # ----------------------------------
 # 🚶 MOVE BETWEEN ROOMS
 # ----------------------------------
 def move(direction, current_room):
-
+    global inventory
     # Check if the direction exists in this room
     if direction in rooms[current_room]:
         new_room = rooms[current_room][direction]
-        print(f"\n🚶 You moved {direction} to {new_room}.")
-        return new_room
+        # Check if new room has a requirement, and if passages have traps and/or monsters.
+        if "requires" in rooms[new_room] and rooms[new_room]["requires"] not in inventory:
+            print(f"\n 🔒 You need a {rooms[new_room]['requires']} to enter {new_room}!")
+            return current_room # Stay in the current room
+        elif current_room == "Room 3" and direction == "forward" or current_room == "Room 6" and direction == "backward":
+            print("Bad luck. You walked into a trap and died.")
+            current_room = "Room 1"
+            inventory = []
+            return current_room
+        elif current_room == "Room 5" and direction == "forward" or current_room == "Room 10" and direction == "backward":
+            print("Nice try. The bridge collapsed beneath you and you fell to your death.")
+            current_room = "Room 1"
+            inventory = []
+            return current_room
+        else:
+            print(f"\n🚶 You moved {direction} to {new_room}.")
+            return new_room
     # If the direction is not valid
     else:
         print("\n⛔ You can't go that way!")
@@ -309,7 +331,7 @@ def game_loop():
         
         # Check inventory
         elif command == "inventory":
-            check_inventory(inventory)
+            check_bag()
         
         # Save game
         elif command == "save":
