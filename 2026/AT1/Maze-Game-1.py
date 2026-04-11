@@ -120,6 +120,9 @@ rooms = {
 # Items collected will go here
 inventory = []
 
+
+rocks_exist = True
+
 # ⭐ You will create a scoring system later
 #score = 0
 
@@ -193,8 +196,8 @@ def load_game():
 # ----------------------------------
 # 🗺️ MAP
 # ----------------------------------
-# COLUMNS  10        20        30        40        50
-           #01234567890123456789012345678901234567890123456789       
+# COLUMNS          10        20        30        40        50
+        #01234567890123456789012345678901234567890123456789       
 def map(current_room):
     map = [                                                     # ROWS
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n", # 0
@@ -208,7 +211,7 @@ def map(current_room):
         "▒  🗡️                  🛡️         👿           🧪  ▒\n", # 8
         "▒        ▒                     ▒                 ▒\n", # 9
         "▒💡      ▒                     ▒                 ▒\n", # 10
-        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪨 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒👾▒\n", # 11
+        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒👾▒\n", # 11
         "▒             ▒💡                ▒💡             ▒\n", # 12
         "▒             ▒                  ▒               ▒\n", # 13
         "▒    🔑                          🚪           ⛏️  ▒\n", # 14
@@ -241,7 +244,9 @@ def map(current_room):
     show_map(map, current_pos)
 
 def show_map(map, pos):
-    r = 0  # row zero 
+    r = 0  # row zero
+    rocks = "🪨"
+    rocks_pos = {"r": 11, "c": 24}
     player = "웃"
     rows = len(map)
     while r < rows:
@@ -250,10 +255,12 @@ def show_map(map, pos):
         rowlen = len(rowString)
         while c < rowlen:  # print each column in row
             if c == pos["c"] and r == pos["r"]:
-                print(player, end="") 
+                print(player, end = "") 
                 c+=1 # double wide character, so move to next column.
+            elif c == rocks_pos["c"] and r == rocks_pos["r"] and rocks_exist:
+                print(rocks, end = "")
             else:
-                print(rowString[c], end="") 
+                print(rowString[c], end = "") 
                 # https://www.w3schools.com/python/ref_func_print.asp
             c+=1
         r+=1
@@ -287,7 +294,10 @@ def collect_item(current_room):
     return value
 
 # Use the items collected
-#def use_item():
+def use_item(new_room):
+    if new_room == "Room 5" and "requires" in inventory:
+        rocks_exist = False
+
 
 
 # Check inventory
@@ -308,28 +318,23 @@ def move(direction, current_room):
         # Check if new room has a requirement, and if passages have traps and/or monsters.
         if "requires" in rooms[new_room] and rooms[new_room]["requires"] not in inventory:
             print(f"\n 🔒 You need a {rooms[new_room]['requires']} to enter {new_room}!")
+            score -= 10
             return current_room # Stay in the current room
         elif current_room == "Room 3" and direction == "forward" or current_room == "Room 6" and direction == "backward":
-            print("Bad luck. You walked into a trap and died.")
+            print("Bad luck. You stepped on a plate and you were impaled in the chest by an arrow.")
             current_room = "Room 1 - Start"
             inventory = []
             score = 0
-            return current_room
+            show_room(current_room, score)
         elif current_room == "Room 5" and direction == "forward" or current_room == "Room 10" and direction == "backward":
             print("Nice try. The bridge collapsed beneath you and you fell to your death.")
             current_room = "Room 1 - Start"
             inventory = []
             score = 0
-            return current_room
+            show_room(current_room, score)
         elif current_room == "Room 11 - Finish":
             print(rooms[current_room]["desc"])
             print(f"Your final score: {score}")
-            play_again = input("Would you like to play again (Yes/No)? ").strip().lower()
-            if play_again == "no":
-                pass
-            else:
-                show_room(current_room)
-
         else:
             print(f"\n🚶 You moved {direction} to {new_room}.")
             return new_room
@@ -370,6 +375,10 @@ def game_loop():
         elif command == "pick up":
             score += collect_item(current_room)
         
+        # Use item
+        elif command == "use":
+            use_item()
+
         # Check inventory
         elif command == "inventory":
             check_bag()
