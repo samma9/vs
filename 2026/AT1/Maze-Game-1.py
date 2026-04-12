@@ -341,7 +341,7 @@ def check_bag():
     else:
         print(f"You have {inventory} in your bag.")
 
-# you Die if you step on a trap or a fight a monster without a weapon, and you will be thrown back to start.
+# you die if you step on a trap or a fight a monster without a weapon, and you will be thrown back to start.
 def death():
     global inventory
     inventory = []
