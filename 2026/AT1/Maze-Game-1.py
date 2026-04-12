@@ -130,7 +130,7 @@ archery_monsters = True
 apex_predator = True
 
 # ⭐ You will create a scoring system later
-#score = 0
+score = 0
 
 # ----------------------------------
 # 🎮 INTRO + HELP
@@ -208,7 +208,7 @@ def map(current_room):
     map = [                                                     # ROWS
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n", # 0
         "▒💡       ▒                    ▒               💡▒\n", # 1
-        "▒  💎         👹      🗝️                     🏹   ▒\n", # 2
+        "▒  💎               🗝️                     🏹   ▒\n", # 2
         "▒         ▒                    ▒                 ▒\n", # 3
         "▒         ▒                    ▒                 ▒\n", # 4
         "▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 5
@@ -249,15 +249,16 @@ def map(current_room):
     current_pos = {"r": rooms[current_room]["pos"]["r"], "c": rooms[current_room]["pos"]["c"]}
     show_map(map, current_pos)
 
-def show_map(map, pos):
+def show_map(map, player_pos):
     r = 0  # row zero
-    rocks = "🪨"
-    rocks_pos = {"r": 11, "c": 24}
     player = "웃"
-    sword_monster = "👿",
-    sword_monster_pos = {"r": 2, "c": 31}, {"r": 8, "c": 34}
-    archery_monster = "👾"
-    archery_monster_pos = {"r": 5, "c": 4}, {"r": 11, "c": 48}
+    rocksfall = "🪨"
+    rocksfall_pos = {"r": 11, "c": 24}
+    sword_monster = '👿'
+    sword_monster_pos = {"r": 2, "c": 31}
+    archr_monster = "👾"
+    archr_monster_pos = {"r": 5, "c": 4}
+
     apex_predator = "👹"
     apex_predator_pos = {"r": 2, "c": 14}
     rows = len(map)
@@ -266,15 +267,16 @@ def show_map(map, pos):
         rowString = map[r]
         rowlen = len(rowString)
         while c < rowlen:  # print each column in row
-            if c == pos["c"] and r == pos["r"]:
+            if c == player_pos["c"] and r == player_pos["r"]:
                 print(player, end = "") 
                 c += 1 # double wide character, so move to next column.
-            elif c == rocks_pos["c"] and r == rocks_pos["r"] and rocks_exist:
-                print(rocks, end = "")
-            elif c == sword_monster_pos["c"] and r == sword_monster_pos["r"] and sword_monsters:
-                print(sword_monster, end = "")
-            elif c == archery_monster_pos["c"] and r == archery_monster_pos["r"] and archery_monsters:
-                print(archery_monster, end = "")
+            elif c == rocksfall_pos["c"] and r == rocksfall_pos["r"] and rocks_exist:
+                print(rocksfall, end = "")
+            elif c == sword_monster_pos["c"] and r == sword_monster_pos["r"] and sword_monster:
+                print(sword_monster, end = "")   
+            elif c == archr_monster_pos["c"] and r == archr_monster_pos["r"] and archr_monster:
+                print(archr_monster, end = "")
+                c += 1 
             elif c == apex_predator_pos["c"] and r == apex_predator_pos["r"] and apex_predator:
                 print(apex_predator, end = "")
             else:
@@ -338,7 +340,6 @@ def move(direction, current_room):
         # Check if new room has a requirement, and if passages have traps and/or monsters.
         if "requires" in rooms[new_room] and rooms[new_room]["requires"] not in inventory:
             print(f"\n\t🔒 You need a {rooms[new_room]['requires']} to enter {new_room}!")
-            score -= 10
             return current_room # Stay in the current room
         elif current_room == "Room 3" and direction == "forward" or current_room == "Room 6" and direction == "backward":
             print("Bad luck. You stepped on a plate and you were impaled in the chest by an arrow.")
@@ -368,7 +369,6 @@ def move(direction, current_room):
 # 🔁 MAIN GAME LOOP
 # ----------------------------------
 def game_loop():
-    score = 0
     # Starting room
     current_room = "Room 1 - Start"
     show_intro()
